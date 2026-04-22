@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtuelle Umgebungen
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Betriebssystem
+.DS_Store
+Thumbs.db
+
+# Gespeicherte Eingabedateien (optional einchecken)
+*.json
