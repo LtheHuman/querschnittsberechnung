@@ -374,7 +374,7 @@ class App:
                 "Determinante ~ 0: Querschnitt ist degeneriert (alle Punkte kollinear?).")
             return
 
-        # Spannungskoeffizienten (TU-Graz-Konvention: My = -∫z·σ dA)
+        # Spannungskoeffizienten an allen Eckpunkten
         # σ = N/A + (Mz·Iy + My·Iyz)/det · ỹ − (My·Iz + Mz·Iyz)/det · z̃
         Ay  =  (M_z_v * I_y_n + M_y_v * I_yz_n) / det
         Az  = -(M_y_v * I_z_n + M_z_v * I_yz_n) / det
