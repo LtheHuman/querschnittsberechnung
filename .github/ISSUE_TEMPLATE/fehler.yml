@@ -1,0 +1,30 @@
+name: Fehler melden
+description: Etwas funktioniert nicht oder ein Ergebnis ist falsch
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Danke fürs Melden! Je genauer die Angaben, desto schneller lässt sich der Fehler finden.
+  - type: textarea
+    id: was
+    attributes:
+      label: Was ist passiert?
+      description: Was hast du gemacht, was hast du erwartet, was kam stattdessen?
+    validations:
+      required: true
+  - type: textarea
+    id: eingabe
+    attributes:
+      label: Eingabe
+      description: Eckpunkte, b, h und Schnittgrößen – oder die gespeicherte .json-Datei hier hineinziehen.
+  - type: textarea
+    id: details
+    attributes:
+      label: Fehlerdetails
+      description: Falls ein Fehlerfenster erschienen ist, „Details anzeigen“ anklicken und den Text hier einfügen.
+      render: text
+  - type: input
+    id: system
+    attributes:
+      label: System und Version
+      placeholder: z. B. Windows 11, Version 2.0.0 (steht unter „Info & Hilfe“)

@@ -1,12 +1,16 @@
 # Querschnittsberechnung
 
+[![Download](https://img.shields.io/github/v/release/LtheHuman/querschnittsberechnung?label=Download&color=2b5fd9)](https://github.com/LtheHuman/querschnittsberechnung/releases/latest)
 [![Tests](https://github.com/LtheHuman/querschnittsberechnung/actions/workflows/tests.yml/badge.svg)](https://github.com/LtheHuman/querschnittsberechnung/actions/workflows/tests.yml)
-![Python](https://img.shields.io/badge/python-3.10%2B-blue)
-![Qt](https://img.shields.io/badge/GUI-PySide6%20%2F%20Qt%206-41cd52)
+[![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-green)](LICENSE)
+![Windows · macOS · Linux](https://img.shields.io/badge/Windows%20·%20macOS%20·%20Linux-grey)
 
 Desktop-App zur **symbolischen und numerischen Berechnung von Querschnittswerten**
 beliebiger Polygone samt **Normalspannungen bei schiefer Biegung mit Normalkraft**
-– entstanden für *Baumechanik 2* an der TU Graz.
+– entstanden als Hilfe für *Baumechanik 2* an der TU Graz, frei nutzbar für alle.
+
+> **Hinweis:** Privates Studierendenprojekt, **kein offizielles Angebot der TU Graz**.
+> Gedacht zur Kontrolle eigener Rechnungen – alle Ergebnisse ohne Gewähr.
 
 ![Screenshot (hell)](docs/screenshot-hell.png)
 
@@ -27,7 +31,29 @@ beliebiger Polygone samt **Normalspannungen bei schiefer Biegung mit Normalkraft
 
 ![Screenshot (dunkel, Spannungsverteilung)](docs/screenshot-dunkel.png)
 
-## Installation
+## Download
+
+Fertige Programme – **ohne Python-Installation** – gibt es unter
+[**Releases**](https://github.com/LtheHuman/querschnittsberechnung/releases/latest):
+
+| System | Datei | Starten |
+|---|---|---|
+| **Windows** 10/11 | `Querschnittsberechnung-Windows.zip` | ZIP entpacken (Rechtsklick → *Alle extrahieren*), dann `Querschnittsberechnung.exe` im entpackten Ordner doppelklicken |
+| **macOS** (Apple Silicon, M1 und neuer) | `Querschnittsberechnung-macOS.zip` | Entpacken, `Querschnittsberechnung.app` in *Programme* ziehen und öffnen |
+| **Linux** (x86-64) | `Querschnittsberechnung-Linux.tar.gz` | Entpacken, `Querschnittsberechnung/Querschnittsberechnung` starten |
+
+**Erster Start:** Das Programm ist nicht kostenpflichtig signiert, deshalb warnt das
+Betriebssystem beim ersten Öffnen einmalig:
+
+- **Windows** („Der Computer wurde durch Windows geschützt“): *Weitere Informationen* →
+  *Trotzdem ausführen*.
+- **macOS** („kann nicht geöffnet werden“): *Systemeinstellungen → Datenschutz & Sicherheit*
+  → ganz unten bei Querschnittsberechnung *Dennoch öffnen*.
+
+Der Quellcode ist offen – wer der Datei nicht traut, kann die App auch selbst aus dem
+Quellcode starten (siehe unten). Ältere Intel-Macs: bitte die Python-Variante verwenden.
+
+## Installation mit Python (für Entwickler:innen)
 
 Voraussetzung: Python 3.10 oder neuer.
 
@@ -62,11 +88,18 @@ querschnitt examples/l_profil.json # Datei direkt öffnen
 | `Ctrl+Shift+C` | Ergebnisse kopieren |
 | `Ctrl+Enter` | Neu berechnen |
 
+| `F1` | Info & Hilfe |
+
 Rechtsklick auf ein Diagramm speichert es als PNG, SVG oder PDF.
+
+**Einheiten:** Die Rechnung ist einheitenfrei, beschriftet ist mit m und MN
+(σ in MN/m² = N/mm²). Wer konsequent z. B. cm und kN verwendet, erhält σ in kN/cm².
 
 ## Konventionen
 
 Koordinaten: y nach rechts, z nach oben; alle Momente beziehen sich auf den Schwerpunkt S.
+Bitte prüfen, ob das zu deiner Lehrveranstaltung passt – manche Lehrbücher legen z nach
+unten oder definieren I<sub>yz</sub> mit anderem Vorzeichen.
 
 - I<sub>yz</sub> = +∫ y·z dA
 - **M<sub>y</sub> > 0** → Druck auf der Seite z > z<sub>S</sub> (M<sub>y</sub> = −∫ z·σ dA)
@@ -92,6 +125,7 @@ querschnitt/
 └── ui/              Qt-Oberfläche (Hauptfenster, Widgets, Theme)
 tests/               Tests gegen bekannte Lösungen + GUI-Smoke-Test
 examples/            Beispiel-Querschnitte
+packaging/           PyInstaller-Konfiguration für die fertigen Programme
 ```
 
 Rechenkern direkt verwenden:
@@ -112,3 +146,29 @@ print(compute_stress(num, M_y=0.1, M_z=0, N=0).sigma_max)
 pip install -e ".[dev]"
 pytest
 ```
+
+## Fehler melden & mitmachen
+
+Fehler gefunden, falsches Ergebnis oder eine Idee? Bitte ein
+[Issue anlegen](https://github.com/LtheHuman/querschnittsberechnung/issues/new/choose).
+Pull Requests sind willkommen – vorher bitte `pytest` laufen lassen.
+
+## Neue Version veröffentlichen
+
+Version in `querschnitt/__init__.py` erhöhen, committen, dann einen Tag pushen:
+
+```bash
+git tag v2.0.1
+git push origin v2.0.1
+```
+
+GitHub baut daraufhin automatisch die Programme für Windows, macOS und Linux, testet sie
+und veröffentlicht sie als Release.
+
+## Lizenz
+
+[MIT](LICENSE) © 2026 LtheHuman – frei nutzbar, veränderbar und weitergebbar, solange der
+Lizenz- und Copyright-Hinweis erhalten bleibt. Ohne Gewähr.
+
+Die fertigen Programme enthalten Qt for Python (PySide6, LGPL-3.0) sowie SymPy, NumPy und
+matplotlib (BSD-artige Lizenzen).

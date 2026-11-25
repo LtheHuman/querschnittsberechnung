@@ -1,14 +1,30 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "querschnittsberechnung"
 dynamic = ["version"]
-description = "Symbolische Querschnittswerte und Normalspannungen beliebiger Polygone (BM2, TU Graz)"
+description = "Symbolische Querschnittswerte und Normalspannungen beliebiger Polygone (Baumechanik)"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "LtheHuman" }]
 requires-python = ">=3.10"
 dependencies = ["PySide6>=6.5", "sympy>=1.12", "numpy>=1.24", "matplotlib>=3.7"]
+keywords = ["Baumechanik", "Querschnitt", "Flächenträgheitsmoment", "schiefe Biegung", "Statik"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Education",
+    "Topic :: Scientific/Engineering",
+    "Natural Language :: German",
+]
+
+[project.urls]
+Homepage = "https://github.com/LtheHuman/querschnittsberechnung"
+Download = "https://github.com/LtheHuman/querschnittsberechnung/releases/latest"
+Issues = "https://github.com/LtheHuman/querschnittsberechnung/issues"
 
 [project.optional-dependencies]
 dev = ["pytest>=7"]
@@ -18,6 +34,9 @@ querschnitt = "querschnitt.app:main"
 
 [tool.setuptools]
 packages = ["querschnitt", "querschnitt.ui"]
+
+[tool.setuptools.package-data]
+querschnitt = ["resources/*"]
 
 [tool.setuptools.dynamic]
 version = { attr = "querschnitt.__version__" }

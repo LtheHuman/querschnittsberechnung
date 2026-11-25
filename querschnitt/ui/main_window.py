@@ -18,6 +18,7 @@ from ..core import (InputError, SectionResult, b_sym, compute_section, compute_s
 from ..plotting import draw_placeholder, draw_section, draw_stress
 from ..project import Project
 from ..report import export_pdf, text_report
+from .about import AboutDialog
 from .theme import DARK, LIGHT, Theme, apply_theme
 from .results import ResultsPanel
 from .widgets import Card, NumberEdit, PointsTable, hint, themed_icon
@@ -148,7 +149,7 @@ class MainWindow(QMainWindow):
         act.triggered.connect(slot)
         if shortcut:
             act.setShortcut(QKeySequence(shortcut))
-        act.setToolTip(f"{tip or text}" + (f"  ({QKeySequence(shortcut).toString()})"
+        act.setToolTip(f"{tip or text.replace('&&', '&')}" + (f"  ({QKeySequence(shortcut).toString()})"
                                            if shortcut else ""))
         return act
 
@@ -190,6 +191,11 @@ class MainWindow(QMainWindow):
         spacer = QWidget()
         spacer.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
         tb.addWidget(spacer)
+
+        self.act_help = self._action("Info && Hilfe", ["help-browser", "help-contents"],
+                                     lambda: AboutDialog(self).exec(), "F1",
+                                     "Kurzanleitung, Konventionen und Lizenz")
+        tb.addAction(self.act_help)
 
         self.theme_btn = QToolButton()
         self.theme_btn.setToolTip("Hell / Dunkel umschalten")

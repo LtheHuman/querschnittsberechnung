@@ -9,6 +9,7 @@ import io
 
 from matplotlib.figure import Figure
 
+from . import __version__
 from .core import NumericSection, SectionResult, StressResult
 from .formatting import fmt, to_latex, to_plain
 from .plotting import draw_section, draw_stress
@@ -150,6 +151,9 @@ def html_report(title: str, names, res: SectionResult, num: NumericSection,
       <p class=muted>tan 2θ = 2·I<sub>yz</sub> / (I<sub>y</sub> − I<sub>z</sub>), θ = ½·arctan(tan 2θ);
          Vorzeichen: I<sub>yz</sub> = +∫yz dA.</p>
       {stress_html}
+      <p class=muted style="margin-top:24px; font-size:7.5pt">Erstellt mit Querschnittsberechnung
+         {__version__} (github.com/LtheHuman/querschnittsberechnung) · privates
+         Studierendenprojekt, kein offizielles Angebot der TU Graz · Ergebnisse ohne Gewähr.</p>
     </body></html>"""
     return doc, images
 
