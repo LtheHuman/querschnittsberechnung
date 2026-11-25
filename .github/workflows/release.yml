@@ -1,6 +1,6 @@
 name: Release
 
-# Baut fertige Programme für Windows, macOS und Linux, sobald ein Versions-Tag
+# Baut fertige Programme für Windows und Linux, sobald ein Versions-Tag
 # (z. B. v2.0.0) gepusht wird, und hängt sie an ein GitHub-Release.
 # Manuell starten (ohne Release) geht über "Actions → Release → Run workflow".
 
@@ -21,7 +21,6 @@ jobs:
       matrix:
         include:
           - { os: windows-latest, name: Windows }
-          - { os: macos-14,       name: macOS }
           - { os: ubuntu-22.04,   name: Linux }
     env:
       QT_QPA_PLATFORM: offscreen
@@ -51,12 +50,6 @@ jobs:
           $p = Start-Process -FilePath "dist/Querschnittsberechnung/Querschnittsberechnung.exe" -ArgumentList "--selftest" -Wait -PassThru
           if ($p.ExitCode -ne 0) { throw "Selbsttest fehlgeschlagen ($($p.ExitCode))" }
           Compress-Archive -Path dist/Querschnittsberechnung -DestinationPath Querschnittsberechnung-Windows.zip
-
-      - name: Selbsttest & Paket (macOS)
-        if: runner.os == 'macOS'
-        run: |
-          dist/Querschnittsberechnung.app/Contents/MacOS/Querschnittsberechnung --selftest
-          ditto -c -k --keepParent dist/Querschnittsberechnung.app Querschnittsberechnung-macOS.zip
 
       - name: Selbsttest & Paket (Linux)
         if: runner.os == 'Linux'
@@ -88,9 +81,9 @@ jobs:
             | System | Datei |
             |---|---|
             | Windows 10/11 | `Querschnittsberechnung-Windows.zip` |
-            | macOS (Apple Silicon, M1 und neuer) | `Querschnittsberechnung-macOS.zip` |
             | Linux (x86-64) | `Querschnittsberechnung-Linux.tar.gz` |
 
             Entpacken und starten – Python wird **nicht** benötigt.
-            Hinweise zum ersten Start (Windows-SmartScreen, macOS-Gatekeeper) stehen im
+            macOS wird nicht unterstützt.
+            Hinweise zum ersten Start (Windows-SmartScreen) stehen im
             [README](https://github.com/LtheHuman/querschnittsberechnung#download).

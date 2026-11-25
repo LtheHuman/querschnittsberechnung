@@ -3,7 +3,7 @@
 [![Download](https://img.shields.io/github/v/release/LtheHuman/querschnittsberechnung?label=Download&color=2b5fd9)](https://github.com/LtheHuman/querschnittsberechnung/releases/latest)
 [![Tests](https://github.com/LtheHuman/querschnittsberechnung/actions/workflows/tests.yml/badge.svg)](https://github.com/LtheHuman/querschnittsberechnung/actions/workflows/tests.yml)
 [![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-green)](LICENSE)
-![Windows · macOS · Linux](https://img.shields.io/badge/Windows%20·%20macOS%20·%20Linux-grey)
+![Windows · Linux](https://img.shields.io/badge/Windows%20·%20Linux-grey)
 
 Desktop-App zur **symbolischen und numerischen Berechnung von Querschnittswerten**
 beliebiger Polygone samt **Normalspannungen bei schiefer Biegung mit Normalkraft**
@@ -39,23 +39,20 @@ Fertige Programme – **ohne Python-Installation** – gibt es unter
 | System | Datei | Starten |
 |---|---|---|
 | **Windows** 10/11 | `Querschnittsberechnung-Windows.zip` | ZIP entpacken (Rechtsklick → *Alle extrahieren*), dann `Querschnittsberechnung.exe` im entpackten Ordner doppelklicken |
-| **macOS** (Apple Silicon, M1 und neuer) | `Querschnittsberechnung-macOS.zip` | Entpacken, `Querschnittsberechnung.app` in *Programme* ziehen und öffnen |
 | **Linux** (x86-64) | `Querschnittsberechnung-Linux.tar.gz` | Entpacken, `Querschnittsberechnung/Querschnittsberechnung` starten |
 
-**Erster Start:** Das Programm ist nicht kostenpflichtig signiert, deshalb warnt das
-Betriebssystem beim ersten Öffnen einmalig:
+**macOS wird nicht unterstützt** – die App läuft nur unter Windows und Linux.
 
-- **Windows** („Der Computer wurde durch Windows geschützt“): *Weitere Informationen* →
-  *Trotzdem ausführen*.
-- **macOS** („kann nicht geöffnet werden“): *Systemeinstellungen → Datenschutz & Sicherheit*
-  → ganz unten bei Querschnittsberechnung *Dennoch öffnen*.
+**Erster Start unter Windows:** Das Programm ist nicht kostenpflichtig signiert, deshalb
+warnt Windows beim ersten Öffnen einmalig („Der Computer wurde durch Windows geschützt“):
+*Weitere Informationen* → *Trotzdem ausführen*.
 
 Der Quellcode ist offen – wer der Datei nicht traut, kann die App auch selbst aus dem
-Quellcode starten (siehe unten). Ältere Intel-Macs: bitte die Python-Variante verwenden.
+Quellcode starten (siehe unten).
 
 ## Installation mit Python (für Entwickler:innen)
 
-Voraussetzung: Python 3.10 oder neuer.
+Voraussetzung: Windows oder Linux mit Python 3.10 oder neuer.
 
 ```bash
 git clone https://github.com/LtheHuman/querschnittsberechnung.git
@@ -162,7 +159,7 @@ git tag v2.0.1
 git push origin v2.0.1
 ```
 
-GitHub baut daraufhin automatisch die Programme für Windows, macOS und Linux, testet sie
+GitHub baut daraufhin automatisch die Programme für Windows und Linux, testet sie
 und veröffentlicht sie als Release.
 
 ## Lizenz

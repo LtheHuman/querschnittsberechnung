@@ -15,7 +15,14 @@ def main(argv: list[str] | None = None) -> int:
     import matplotlib
     matplotlib.use("QtAgg")
 
-    from PySide6.QtWidgets import QApplication
+    from PySide6.QtWidgets import QApplication, QMessageBox
+
+    if sys.platform == "darwin":
+        _app = QApplication(argv)
+        QMessageBox.critical(None, "Querschnittsberechnung",
+                             "macOS wird nicht unterstützt.\n\n"
+                             "Die App läuft nur unter Windows und Linux.")
+        return 1
 
     from . import __version__
     from .ui.about import app_icon, show_exception

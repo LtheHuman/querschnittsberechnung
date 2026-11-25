@@ -1,13 +1,13 @@
 # PyInstaller-Konfiguration – baut ein eigenständiges Programm (ohne Python-Installation).
+# Unterstützt werden nur Windows und Linux.
 # Aufruf aus dem Projektordner:  pyinstaller packaging/querschnitt.spec --noconfirm
-import re
 import sys
 from pathlib import Path
 
 ROOT = Path(SPECPATH).parent
 NAME = "Querschnittsberechnung"
-VERSION = re.search(r'__version__ = "([^"]+)"',
-                    (ROOT / "querschnitt" / "__init__.py").read_text()).group(1)
+if sys.platform == "darwin":
+    raise SystemExit("macOS wird nicht unterstützt – nur Windows und Linux.")
 RES = ROOT / "querschnitt" / "resources"
 ICON = str(RES / ("icon.ico" if sys.platform == "win32" else "icon.png"))
 
@@ -45,18 +45,3 @@ exe = EXE(
     icon=ICON,
 )
 coll = COLLECT(exe, a.binaries, a.datas, name=NAME)
-
-if sys.platform == "darwin":
-    app = BUNDLE(
-        coll,
-        name=f"{NAME}.app",
-        icon=ICON,
-        bundle_identifier="io.github.lthehuman.querschnittsberechnung",
-        version=VERSION,
-        info_plist={
-            "CFBundleDisplayName": NAME,
-            "CFBundleShortVersionString": VERSION,
-            "NSHighResolutionCapable": True,
-            "NSRequiresAquaSystemAppearance": False,   # Dunkelmodus erlauben
-        },
-    )
