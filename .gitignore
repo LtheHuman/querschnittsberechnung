@@ -22,5 +22,9 @@ env/
 .DS_Store
 Thumbs.db
 
-# Gespeicherte Eingabedateien (optional einchecken)
+# Eigene Eingabedateien nicht einchecken – Beispiele schon
 *.json
+!examples/*.json
+
+# Test-Cache
+.pytest_cache/
